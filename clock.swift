@@ -3,12 +3,15 @@ import UIKit
 
 @IBDesignable class clock: UIView {
     
+    //declaring time variables
+    
     var hour = 0
     var minute = 0
     var second = 0
     
     
-    
+    //this function is supposed to return the current hour, minute and second, but I am having difficulty with getting it to 
+    //return values for the switch/case statement to crunch through
     
     func updateTime(hour: Int, minute: Int, second: Int) -> (hour: Int, minute: Int, second: Int) {
         
@@ -25,6 +28,8 @@ import UIKit
         return (hour, minute, second)
         
     }
+    
+    // drawrect is supposed to draw out the different clockfaces based on the time returned by updateTime() drawCanvas0() is the default clock face
     
     override func drawRect(rect: CGRect) {
         
