@@ -9,6 +9,13 @@ import UIKit
     var minute = 0
     var second = 0
     
+    //this is declaring a timer that runs updateTime() which returns the time and then orders a redraw of the UIView element I have in storyboard 
+    var timer = NSTimer()
+    
+    // I want this timer to run every second so that the new view is redrawn each second. This will be necessary when updating
+    // seconds/minutes when I add that functionality.
+    
+    timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTime", userInfo: nil, repeats: true)
     
     //this function is supposed to return the current hour, minute and second, but I am having difficulty with getting it to 
     //return values for the switch/case statement to crunch through
