@@ -1,46 +1,55 @@
 import UIKit
 
+// updateTime pulls the time, breaks it into its components, and returns hours, minutes and seconds and summons drawRect to redraw the visual representation of the time.
 
-@IBDesignable class clock: UIView {
+
+class timeUpdate: UIView {
     
-    //declaring time variables
-    
-    var hour = 0
-    var minute = 0
-    var second = 0
-    
-    //this is declaring a timer that runs updateTime() which returns the time and then orders a redraw of the UIView element I have in storyboard 
-    var timer = NSTimer()
-    
-    // I want this timer to run every second so that the new view is redrawn each second. This will be necessary when updating
-    // seconds/minutes when I add that functionality.
-    
-    timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTime", userInfo: nil, repeats: true)
-    
-    //this function is supposed to return the current hour, minute and second, but I am having difficulty with getting it to 
-    //return values for the switch/case statement to crunch through
-    
-    func updateTime(hour: Int, minute: Int, second: Int) -> (hour: Int, minute: Int, second: Int) {
+    func updateTime() -> (Int, Int, Int) {
+
         
         var date:NSDate = NSDate()
         var calendar:NSCalendar = NSCalendar.currentCalendar()
         var components:NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitHour | NSCalendarUnit.CalendarUnitMinute | NSCalendarUnit.CalendarUnitSecond, fromDate: date)
         
-        let hour = components.hour
-        let minute = components.minute
-        let second = components.second
         
+        var hour = components.hour
+        var minute = components.minute
+        var second = components.second
         
         setNeedsDisplay()
         return (hour, minute, second)
         
+        
     }
     
-    // drawrect is supposed to draw out the different clockfaces based on the time returned by updateTime() drawCanvas0() is the default clock face
+
+}
+
+// trying to get this timer to automatically run, updateTime, and then redraw the graphics.
+
+class timer: NSObject {
+    
+    override init () { super.init() }
+    func timeTimer() {
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
+        
+    }
+    
+}
+
+
+@IBDesignable class clock: UIView {
+    
+    
+    
+    
+//drawRect contains all of the draw Methods and a switch/case for matching draw methods with returned time components.
     
     override func drawRect(rect: CGRect) {
         
-        
+        let (hour, minute, second) = timeUpdate().updateTime()
         
         switch hour {
             
@@ -164,6 +173,8 @@ import UIKit
             
             
         default:
+            
+            println("hour tick")
             //// Color Declarations
             let color0 = UIColor(red: 0.894, green: 0.000, blue: 0.476, alpha: 1.000)
             
@@ -243,6 +254,30 @@ import UIKit
             eMPTY11Path.lineWidth = 1
             eMPTY11Path.stroke()
         }
+        
+        
+        switch minute {
+            
+        case 0-60:
+            println("minute tick")
+            
+        default:
+            println("minute default")
+            
+        }
+        
+        switch second {
+            
+        case 0-60:
+            println("second tick")
+            
+        default:
+            println("second value")
+            
+            
+        }
+        
+        
         
     }
     
