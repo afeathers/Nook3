@@ -36,7 +36,7 @@ import Foundation
     
     
     
-    // drawrect is supposed to draw out the different clockfaces based on the time returned by updateTime()
+    // drawrect is supposed to draw out the different clockfaces based on the time components returned by updateTime()
     
     override func drawRect(rect: CGRect) {
         
