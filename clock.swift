@@ -27,7 +27,7 @@ import Foundation
     
     //This timer isn't firing. Does it belong in the viewDidLoad in the View Controller?
     
-    func fire() {
+    func timerFunction() {
         
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:"updateTime:", userInfo: nil, repeats: true)
         println("timer fired")
